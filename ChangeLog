@@ -1,0 +1,17 @@
+2016-12-23 Taha Zerrouki:
+	- host on github
+	- create Makefile
+	- restructure files and folders
+2014-07-11 Taha Zerrouki:
+	- add more stopwords
+	- add more fields, especially, syntaxic effect of the stop word to be used in syntaxic analysis
+02-12-2010 Taha Zerrouki:
+	*تصفية الكلمات المستبعدة
+	*إضافة كلمات جديدة
+	*إضافة زوائد جديدة
+01-12-2010 Taha Zerrouki:
+	*إضافة كلمات مستبعدة جديدة من القرآن الكريم
+08-09-2010 Fathi tanzakhti:
+	*إضافة  بعض الكلمات
+17-08-2009 Taha Zerrouki:
+	*إضافة عرض خاصية التعدي واللزوم في النتائج
