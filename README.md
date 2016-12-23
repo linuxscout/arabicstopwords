@@ -18,22 +18,23 @@ The Word list contains only wonds in its commun forms, and we have generated all
 Data Structure
 --------------
 All forms data .ODS/CSV file 
-- 1st field : unvocalised word ( İí)
-- 2nd field : unvocalised stemmed word with -'-' between affixes: e.g. İ-È-ÎãÓíä-í
+- 1st field : unvocalised word ( ÙÙŠ)
+- 2nd field : unvocalised stemmed word with -'-' between affixes: e.g. Ù-Ø¨-Ø®Ù…Ø³ÙŠÙ†-ÙŠ
 
     
 Minimal classified  data .ODS/CSV file 
-- 1st field : unvocalised word ( İí)
-- 2nd field : type of the word: e.g. ÍÑİ
-- 3rd field : class of word : e.g. preposition 
+- 1st field : unvocalised word ( ÙÙŠ)
+- 2nd field : type of the word: e.g. Ø­Ø±Ù
+- 3rd field : class of word : e.g. preposition
+
 Affixation infomration in other fields:
--    4th field : AIN in arabic , if word accept Conjuction 'ÇáÚØİ', '*' else
--    5th field : TEH in arabic , if word accept definate article 'Çá ÇáÊÚÑíİ', '*' else
--    6th field : JEEM in arabic , if word accept preposition  article 'ÍÑæİ ÇáÌÑ ÇáãÊÕáÉ', '*' else      
--    7th field : DAD in arabic , if word accept IDAFA  articles 'ÇáÖãÇÆÑ ÇáãÊÕáÉ', '*' else              
--    7th field : SAD in arabic , if word accept verb conjugation  articles 'ÇáÊÕÑíİ', '*' else       
--    8th field : LAM in arabic , if word accept LAM QASAM   articles 'áÇã ÇáŞÓã', '*' else       
--    8th field : MEEM in arabic , if word has ALEF LAM as definition article 'ãÚÑİ', '*' else        
+-    4th field : AIN in arabic , if word accept Conjuction 'Ø§Ù„Ø¹Ø·Ù', '*' else
+-    5th field : TEH in arabic , if word accept definate article 'Ø§Ù„ Ø§Ù„ØªØ¹Ø±ÙŠÙ', '*' else
+-    6th field : JEEM in arabic , if word accept preposition  article 'Ø­Ø±ÙˆÙ Ø§Ù„Ø¬Ø± Ø§Ù„Ù…ØªØµÙ„Ø©', '*' else      
+-    7th field : DAD in arabic , if word accept IDAFA  articles 'Ø§Ù„Ø¶Ù…Ø§Ø¦Ø± Ø§Ù„Ù…ØªØµÙ„Ø©', '*' else              
+-    7th field : SAD in arabic , if word accept verb conjugation  articles 'Ø§Ù„ØªØµØ±ÙŠÙ', '*' else       
+-    8th field : LAM in arabic , if word accept LAM QASAM   articles 'Ù„Ø§Ù… Ø§Ù„Ù‚Ø³Ù…', '*' else       
+-    8th field : MEEM in arabic , if word has ALEF LAM as definition article 'Ù…Ø¹Ø±Ù', '*' else        
 
 How to customize stop word list
 ---------------
