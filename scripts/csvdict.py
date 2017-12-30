@@ -175,7 +175,17 @@ class CsvDict:
             tuple_table = ar_stopwords.generate_allforms(fields);
 
             for conj  in tuple_table:
-                fields = {}                
+                fields = {} 
+                """
+                UNVOCALIZED TEXT NOT NULL,
+                PROCLETIC TEXT,
+                TAGS TEXT,
+                VOCALIZED TEXT,
+                STEM TEXT,
+                TYPE TEXT,
+                ORIGINAL TEXT,
+                ENCLETIC TEXT
+                """               
                 fields['stemmed'] = conj;
                 fields['vocalized'] = ar_stopwords.standardize_form(fields['stemmed']);
                 fields['word']      = ar_stopwords.standardize_form(fields['stemmed']);
