@@ -21,6 +21,7 @@ All forms data .ODS/CSV file
 - 1st field : unvocalised word ( في)
 - 2nd field : unvocalised stemmed word with -'-' between affixes: e.g. ف-ب-خمسين-ي
 
+![Stopwords Example](doc/images/stopwords.png  "Stopwords Example")
     
 Minimal classified  data .ODS/CSV file 
 - 1st field : unvocalised word ( في)
