@@ -5,9 +5,9 @@ RELEASES :=releases
 BUILD :=$(RELEASES)/build
 OUTPUT :=tests/output
 SCRIPT :=scripts
-VERSION=0.4
+VERSION=0.5
 DOC="."
-
+FORMAT:=csv
 default: all
 # Clean build files
 clean:
@@ -31,16 +31,37 @@ ods:
 release: backup format pack
 
 
-format:
-	#Generate Specific format SQL and python
+format:py sql csv
+#~ 	#Generate Specific format SQL and python
+#~ 	# all forms
+#~ 	python $(SCRIPT)/generate_stopwords_format.py -v $(VERSION) -f $(OUTPUT)/stopwords.csv           > $(OUTPUT)/stopwordsallforms.csv 
+#~ 	python $(SCRIPT)/generate_stopwords_format.py -f $(OUTPUT)/stopwords.csv -o py >$(OUTPUT)/stopwordsallforms.py
+#~ 	python $(SCRIPT)/generate_stopwords_format.py -f $(OUTPUT)/stopwords.csv -o sql    >$(OUTPUT)/stopwordsallforms.sql
+#~ 	# classified
+#~ 	python $(SCRIPT)/generate_stopwords_format.py -A -f $(OUTPUT)/stopwords.csv           > $(OUTPUT)/stopwords_classified.csv 
+#~ 	python $(SCRIPT)/generate_stopwords_format.py -A -f $(OUTPUT)/stopwords.csv -o py > $(OUTPUT)/stopwords_classified.py
+#~ 	python $(SCRIPT)/generate_stopwords_format.py -A -f $(OUTPUT)/stopwords.csv -o sql    > $(OUTPUT)/stopwords_classified.sql
+
+py: FORMAT:=py
+sql: FORMAT:=sql
+csv: FORMAT:=csv
+
+py sql csv:
+	#Generate Specific format CSV SQL and python
+	echo " Generate ${FORMAT} version"
 	# all forms
-	python $(SCRIPT)/generate_stopwords_format.py -v $(VERSION)-f $(OUTPUT)/stopwords.csv           > $(OUTPUT)/stopwordsallforms.csv 
-	python $(SCRIPT)/generate_stopwords_format.py -f $(OUTPUT)/stopwords.csv -o python >$(OUTPUT)/stopwordsallforms.py
-	python $(SCRIPT)/generate_stopwords_format.py -f $(OUTPUT)/stopwords.csv -o sql    >$(OUTPUT)/stopwordsallforms.sql
+#~ 	python $(SCRIPT)/generate_stopwords_format.py --version $(VERSION) -f $(OUTPUT)/stopwords.csv -o ${FORMAT}    >$(OUTPUT)/stopwordsallforms.${FORMAT}
+#~ 	# classified
+#~ 	python $(SCRIPT)/generate_stopwords_format.py --version $(VERSION) -A -f $(OUTPUT)/stopwords.csv -o ${FORMAT}    > $(OUTPUT)/stopwords_classified.${FORMAT}
+	python $(SCRIPT)/generate_stopwords_forms.py --version $(VERSION) -f $(OUTPUT)/stopwords.csv -o ${FORMAT}    >$(OUTPUT)/stopwordsallforms.${FORMAT}
 	# classified
-	python $(SCRIPT)/generate_stopwords_format.py -A -f $(OUTPUT)/stopwords.csv           > $(OUTPUT)/stopwords_classified.csv 
-	python $(SCRIPT)/generate_stopwords_format.py -A -f $(OUTPUT)/stopwords.csv -o python > $(OUTPUT)/stopwords_classified.py
-	python $(SCRIPT)/generate_stopwords_format.py -A -f $(OUTPUT)/stopwords.csv -o sql    > $(OUTPUT)/stopwords_classified.sql
+	python $(SCRIPT)/generate_stopwords_forms.py --version $(VERSION) -A -f $(OUTPUT)/stopwords.csv -o ${FORMAT}    > $(OUTPUT)/stopwords_classified.${FORMAT}
+
+#~ csv:
+#~ 	python $(SCRIPT)/generate_stopwords_format.py --version $(VERSION) -f $(OUTPUT)/stopwords.csv           > $(OUTPUT)/stopwordsallforms.csv 
+#~ 	# classified
+#~ 	python $(SCRIPT)/generate_stopwords_format.py -A -f $(OUTPUT)/stopwords.csv           > $(OUTPUT)/stopwords_classified.csv 
+
 
 #packaging 
 

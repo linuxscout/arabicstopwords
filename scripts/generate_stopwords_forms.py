@@ -7,7 +7,7 @@ import re
 import  getopt
 import os
 import string
-from ar_ctype import *
+#~ import pyarabic.araby as araby
 from ar_stowords import *
 scriptname = os.path.splitext(os.path.basename(sys.argv[0]))[0]
 scriptversion = '0.1'
@@ -22,10 +22,26 @@ def usage():
 
     print "\t[-f | --file= filename]\tinput file to %s"%scriptname
     print "\t[-o | --out= output format]\toutput format(csv,python,sql)"
-    print "\t[-A | --notall]\t don't generate all forms""
+    print "\t[-A | --notall]\t don't generate all forms"
     print "\r\nThis program is licensed under the GPL License\n"
 
+
 def grabargs():
+    parser = argparse.ArgumentParser(description='Convert Quran Corpus into CSV format.')
+    # add file name to import and filename to export
+    
+    parser.add_argument("-f", dest="filename", required=True,
+    help="input file to convert", metavar="FILE")
+    
+    parser.add_argument("-o", dest="outformat", nargs='?',
+    help="output format(csv, sql, py)", metavar="FORMAT")
+    
+    parser.add_argument("--all", type=bool, nargs='?',
+                        const=True, 
+                        help="Generate all stopwords forms")
+    args = parser.parse_args()
+    return args
+def grabargs2():
 #  "Grab command-line arguments"
     fname = ''
     outputformat = 'csv'
@@ -59,10 +75,17 @@ def grabargs():
     return (fname,outputformat, allforms)
 
 def main():
+    
+    #~ filename,outputformat, allforms =grabargs()
+    args = grabargs()
+    
 
-    filename,outputformat, allforms =grabargs()
+    outputformat = string.lower(args.get)
+    filename = args.filename
+    outputformat = string.lower(args.outformat)
+    allforms = args.all
 
-    outputformat = string.lower(outputformat)
+
     if outputformat not in ('csv','python','sql'):
         outputformat='csv';
     print "# generated format",outputformat
@@ -183,7 +206,7 @@ def main():
                                                     item['original'],
                                                     item['encletic'],                                                   
                                                     );
-                    elif outputformat=='python':
+                    elif outputformat in ('python','py'):
                         fields=u"";
                         for key in item.keys():
                             onefield=u"'%s':u'%s',"%(key,item[key]);

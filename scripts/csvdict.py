@@ -73,6 +73,13 @@ class CsvDict:
                 'stemmed',
                 #~ 'word',
                 #~ 'standard',
+                'procletic',
+                'tags',
+                'vocalized',
+                'stem',
+                'type',
+                'original',
+                'encletic', 
                 ]
         self.display_order[False] =[
                 'vocalized', 
