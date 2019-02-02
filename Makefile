@@ -75,6 +75,9 @@ pack:
 	cd $(BUILD) && tar cfj arabicstopwords.$(VERSION).tar.bz2 * 
 	mv $(BUILD)/arabicstopwords.$(VERSION).tar.bz2 $(RELEASES)/
 
+sqlite:
+	sqlite3 database.sqlite3 < $(OUTPUT)/stopwordsallforms.sql
+	sqlite3 database.sqlite3 < $(OUTPUT)/stopwords_classified.sql
 install:
 	# install arabicstopwords library
 	cd python_lib;python setup.py install
