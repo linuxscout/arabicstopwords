@@ -70,7 +70,7 @@ class CsvDict:
         self.display_order= {}
         self.display_order[True] =[
                 'vocalized',
-                'stemmed',
+                #~ 'stemmed',
                 #~ 'word',
                 #~ 'standard',
                 'procletic',
@@ -82,6 +82,7 @@ class CsvDict:
                 'encletic', 
                 ]
         self.display_order[False] =[
+                'word',
                 'vocalized', 
                 'type_word',
                 'class_word',
