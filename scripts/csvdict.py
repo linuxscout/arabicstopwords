@@ -134,9 +134,9 @@ class CsvDict:
                 key = self.display_order[self.generate_all_forms][k];
                 # some fields are integer, than we use str
                 try:
-                    items.append(unicode(fields[key]))
+                    items.append(unicode(fields.get(key, key)))
                 except:
-                    print fields
+                    print "error", fields
             lines.append(u"\t".join(items))
         
         return u"\n".join(lines)
@@ -180,9 +180,10 @@ class CsvDict:
             return [fields, ];
         else:
             tuple_table = ar_stopwords.generate_allforms(fields);
-
             for conj  in tuple_table:
-                fields = {} 
+                result_fields = {} 
+                result_fields['type'] = fields.get("type_word", 'type_word')
+                result_fields['original'] = fields["word"]                
                 """
                 UNVOCALIZED TEXT NOT NULL,
                 PROCLETIC TEXT,
@@ -192,12 +193,21 @@ class CsvDict:
                 TYPE TEXT,
                 ORIGINAL TEXT,
                 ENCLETIC TEXT
-                """               
-                fields['stemmed'] = conj;
-                fields['vocalized'] = ar_stopwords.standardize_form(fields['stemmed']);
-                fields['word']      = ar_stopwords.standardize_form(fields['stemmed']);
-                fields['standard']  = araby.strip_tashkeel(fields['vocalized']);
+                """       
+                #~ print(tuple_table[conj])
+                stemmed, tags = conj     
+                result_fields['stemmed'] = stemmed
+                result_fields['vocalized'] = ar_stopwords.standardize_form(result_fields['stemmed']);
+                result_fields['word']      = ar_stopwords.standardize_form(result_fields['stemmed']);
+                result_fields['standard']  = araby.strip_tashkeel(result_fields['vocalized']);
+                parts = stemmed.split(';')
+                if len(parts)>=3:
+                    result_fields['procletic'] = parts[0]
+                    result_fields['stem'] = parts[1]
+                    result_fields['encletic'] = parts[2]                    
+                result_fields['tags'] = tags #fields.get("tags", 'tags')
+                result_fields['unvocalized'] = result_fields['standard']
                 
-                fields_table.append(fields)
+                fields_table.append(result_fields)
             return fields_table
             

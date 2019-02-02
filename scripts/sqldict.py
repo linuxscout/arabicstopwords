@@ -97,9 +97,9 @@ class SqlDict(csvdict.CsvDict):
             for k in range(len(self.display_order[self.generate_all_forms])):
                 key = self.display_order[self.generate_all_forms][k];
                 if key in self.boolean_fields:
-                    items.append(u"%d"%fields[key]);
+                    items.append(u"%d"%fields.get(key, 0));
                 else:
-                    items.append(u"'%s'"%fields[key]);
+                    items.append(u"'%s'"%fields.get(key, ""));
 
             if self.generate_all_forms:
                 lines.append("insert into STOPWORDS values (%s);"%u', '.join(items))

@@ -30,7 +30,7 @@ def grabargs():
     parser.add_argument("-v", dest="version", nargs='?',
     help="PRelease version", metavar="Version")
     
-    parser.add_argument("--all", type=bool, nargs='?',
+    parser.add_argument("-a",dest="all", type=bool, nargs='?',
                         const=True, 
                         help="Generate all stopwords forms")
     args = parser.parse_args()
@@ -44,7 +44,7 @@ def main():
     outputformat = args.outformat
     allforms = True if args.all else False
     version = args.version if args.version else ""
-    print(filename, outputformat, allforms, version)
+    #~ print(filename, outputformat, allforms, version)
     #~ sys.exit()
 
     outputformat = string.lower(outputformat)

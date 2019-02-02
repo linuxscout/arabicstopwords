@@ -6,24 +6,10 @@ import sys
 import re
 import argparse
 import os
-import string
-#~ import pyarabic.araby as araby
 from ar_stowords import *
 scriptname = os.path.splitext(os.path.basename(sys.argv[0]))[0]
 scriptversion = '0.1'
 AuthorName="Taha Zerrouki"
-def usage():
-# "Display usage options"
-    print "(C) CopyLeft 2007, %s"%AuthorName
-    print "Usage: %s -f filename [OPTIONS]" % scriptname
-#"Display usage options"
-    print "\t[-h | --help]\t\toutputs this usage message"
-    print "\t[-V | --version]\tprogram version"
-
-    print "\t[-f | --file= filename]\tinput file to %s"%scriptname
-    print "\t[-o | --out= output format]\toutput format(csv,python,sql)"
-    print "\t[-A | --notall]\t don't generate all forms"
-    print "\r\nThis program is licensed under the GPL License\n"
 
 
 def grabargs():
@@ -36,54 +22,18 @@ def grabargs():
     parser.add_argument("-o", dest="outformat", nargs='?',
     help="output format(csv, sql, py)", metavar="FORMAT")
     
-    parser.add_argument("-A", type=bool, dest="all", nargs='?',
+    parser.add_argument("-a", type=bool, dest="all", nargs='?',
                         const=True, 
-                        help="Generate all stopwords forms")
+                        help="Generate all forms")
+                        
     parser.add_argument("--version", type=str, dest="version", nargs='?',
                         const="0.1",
                         help="release version")
     args = parser.parse_args()
     return args
-def grabargs2():
-#  "Grab command-line arguments"
-    fname = ''
-    outputformat = 'csv'
-    allforms = True
-
-    if not sys.argv[1:]:
-        usage()
-        sys.exit(0)
-    try:
-        opts, args = getopt.getopt(sys.argv[1:], "AhV:f:o:",
-                               ["help", "version","notall"
-                                 "file=", "out="],)
-    except getopt.GetoptError:
-        usage()
-        sys.exit(0)
-    for o, val in opts:
-        if o in ("-h", "--help"):
-            usage()
-            sys.exit(0)
-        if o in ("-V", "--version"):
-            print scriptversion
-            sys.exit(0)
-        if o in ("-A", "--notall"):
-            allforms = False            
-        if o in ("-f", "--file"):
-            fname = val
-        if o in ("-o", "--out"):
-            outputformat = val;
-        else:
-            outputformat = 'csv';   
-    return (fname,outputformat, allforms)
 
 def main():
-    
-    #~ filename,outputformat, allforms =grabargs()
     args = grabargs()
-    
-
-    #~ outputformat = args.outputformat.lower()
     filename = args.filename
     outputformat = args.outformat.lower()
     allforms = args.all
@@ -128,7 +78,6 @@ def main():
     counter_generated=1;
 
     while line and counter<limit:
-##      text=" ".join([text,chomp(line)])
         line=fl.readline().decode("utf8");
         line=chomp(line);
         if not line.startswith("#"):
@@ -188,7 +137,7 @@ def main():
                     #~is_defined=True;
                 #~else:
                     #~is_defined=False;                   
-                list0=generate_allforms(word,type_word, class_word,has_pronoun,has_conjuction,has_preposition,has_definition,has_interrog,has_conjugation, has_qasam,is_defined);
+                list0 = generate_allforms(word,type_word, class_word,has_pronoun,has_conjuction,has_preposition,has_definition,has_interrog,has_conjugation, has_qasam,is_defined);
                 for item in list0:
                     l=item['vocalized'];
                     counter_generated+=1;
