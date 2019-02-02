@@ -449,3 +449,23 @@
 /archive/output/stopwordsallforms.sql
 /archive/output/stopwordsallforms.txt
 /archive/txt
+/docs/مراسلات/الكلمات المستبعدة.doc
+/docs/مراسلات/كيفية العمل على المستبعدات-فاضل.doc
+/docs/مراسلات/كيفية العمل على المستبعدات.doc
+/python_lib/Arabic_Stopwords.egg-info/PKG-INFO
+/python_lib/Arabic_Stopwords.egg-info/SOURCES.txt
+/python_lib/Arabic_Stopwords.egg-info/dependency_links.txt
+/python_lib/Arabic_Stopwords.egg-info/requires.txt
+/python_lib/Arabic_Stopwords.egg-info/top_level.txt
+/python_lib/arabicstopwords/__init__.pyc
+/python_lib/arabicstopwords/arabicstopwords.pyc
+/python_lib/arabicstopwords/stopwordsallforms.pyc
+/python_lib/build/lib.linux-x86_64-2.7/arabicstopwords/__init__.py
+/python_lib/build/lib.linux-x86_64-2.7/arabicstopwords/arabicstopwords.py
+/python_lib/build/lib.linux-x86_64-2.7/arabicstopwords/stopwords_classified.py
+/python_lib/build/lib.linux-x86_64-2.7/arabicstopwords/stopwordsallforms.py
+/python_lib/dist/Arabic_Stopwords-0.2-py2.7.egg
+/releases/arabicstopwords.0.5.tar.bz2
+/releases/arabicstopwords.0.6.tar.bz2
+/archive/arabicstopwords0.4/output/stopwordsallforms.py
+/archive/arabicstopwords0.5/output/stopwordsallforms.py

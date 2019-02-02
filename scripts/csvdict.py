@@ -39,7 +39,7 @@ class CsvDict:
         #~ self.generate_all_forms = True
         self.generate_all_forms = allforms
         #generic Header for project
-        self.headerlines = [ "*************************************",
+        self.headerlines = [ "#*************************************",
         "Arabic Stop word list for morphology analysis and information retrival",
                     "Version        : %s"%self.version,
                     "Generated at   : %s "%time.strftime("%Y/%m/%d:%H:%M"),                    

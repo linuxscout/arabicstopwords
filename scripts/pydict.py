@@ -36,7 +36,9 @@ class PyDict(csvdict.CsvDict):
         """
         add the header for new dict
         """
-        line = "##TAHAH" + "\n##".join(self.headerlines) +"\n"
+        line = """#!/usr/bin/env python
+# -*- coding: utf-8 -*-\n"""
+        line += "\n##".join(self.headerlines) +"\n"
         line += "STOPWORDS={}";
         return line
                
@@ -53,7 +55,7 @@ class PyDict(csvdict.CsvDict):
             items=[];
             #~ items.append(u"%d"%fields['id']);                   
             for k in range(len(self.display_order[self.generate_all_forms])):
-                print(fields.keys())
+                #~ print(fields.keys())
                 key = self.display_order[self.generate_all_forms][k];
                 if key in self.boolean_fields:
                     items.append(u"'%s':%d"%(key, fields[key]));

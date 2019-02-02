@@ -50,9 +50,10 @@ def main():
     outputformat = string.lower(outputformat)
     if outputformat not in ('csv', 'python', 'py', 'sql'):
         outputformat='csv';
-    print "--~# generated format", outputformat
-    print "--~#file name ", filename
-    print "--~#output format", outputformat
+        #~ print "--~# generated format", outputformat
+        #~ print "--~#file name ", filename
+        #~ print "--~#output format", outputformat
+    
     #~sys.exit()
     if outputformat in ('python', 'py'):
         import pydict

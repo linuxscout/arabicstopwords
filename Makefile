@@ -61,6 +61,8 @@ pack:
 	mkdir -p $(BUILD)/python/stopwords
 	cp $(OUTPUT)/stopwordsallforms.py $(BUILD)/python/stopwords
 	cp $(OUTPUT)/stopwords_classified.py $(BUILD)/python/stopwords
+	cp $(OUTPUT)/stopwordsallforms.py python_lib/arabicstopwords
+	cp $(OUTPUT)/stopwords_classified.py python_lib/arabicstopwords
 	# sql
 	mkdir -p $(BUILD)/sql
 	cp -f $(OUTPUT)/stopwordsallforms.sql $(BUILD)/sql/
@@ -73,3 +75,7 @@ pack:
 	cd $(BUILD) && tar cfj arabicstopwords.$(VERSION).tar.bz2 * 
 	mv $(BUILD)/arabicstopwords.$(VERSION).tar.bz2 $(RELEASES)/
 
+install:
+    # install arabicstopwords library
+    cd python_lib;python setup.py install
+    
