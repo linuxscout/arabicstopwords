@@ -76,6 +76,7 @@ pack:
 	mv $(BUILD)/arabicstopwords.$(VERSION).tar.bz2 $(RELEASES)/
 
 install:
-    # install arabicstopwords library
-    cd python_lib;python setup.py install
-    
+	# install arabicstopwords library
+	cd python_lib;python setup.py install
+publish:
+	git push origin master
