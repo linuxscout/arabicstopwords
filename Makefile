@@ -80,3 +80,15 @@ install:
 	cd python_lib;python setup.py install
 publish:
 	git push origin master
+wheel:
+	cd python_lib;sudo python setup.py bdist_wheel
+wheel3:
+	cd python_lib;sudo python3 setup.py bdist_wheel
+install:
+	cd python_lib;sudo python setup.py install
+install3:
+	cd python_lib;sudo python3 setup.py install
+sdist:
+	cd python_lib;sudo python setup.py sdist
+upload:
+	echo "use twine upload dist/arabicstopwords-0.6-py2-none-any.whl"	
