@@ -4,7 +4,7 @@
 
 import sys
 import re
-import  getopt
+import argparse
 import os
 import string
 #~ import pyarabic.araby as araby
@@ -36,9 +36,12 @@ def grabargs():
     parser.add_argument("-o", dest="outformat", nargs='?',
     help="output format(csv, sql, py)", metavar="FORMAT")
     
-    parser.add_argument("--all", type=bool, nargs='?',
+    parser.add_argument("-A", type=bool, dest="all", nargs='?',
                         const=True, 
                         help="Generate all stopwords forms")
+    parser.add_argument("--version", type=str, dest="version", nargs='?',
+                        const="0.1",
+                        help="release version")
     args = parser.parse_args()
     return args
 def grabargs2():
@@ -80,9 +83,9 @@ def main():
     args = grabargs()
     
 
-    outputformat = string.lower(args.get)
+    #~ outputformat = args.outputformat.lower()
     filename = args.filename
-    outputformat = string.lower(args.outformat)
+    outputformat = args.outformat.lower()
     allforms = args.all
 
 

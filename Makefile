@@ -5,7 +5,7 @@ RELEASES :=releases
 BUILD :=$(RELEASES)/build
 OUTPUT :=tests/output
 SCRIPT :=scripts
-VERSION=0.5
+VERSION=0.6
 DOC="."
 FORMAT:=csv
 default: all
