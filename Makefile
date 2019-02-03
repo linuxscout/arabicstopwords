@@ -76,8 +76,12 @@ pack:
 	mv $(BUILD)/arabicstopwords.$(VERSION).tar.bz2 $(RELEASES)/
 
 sqlite:
-	sqlite3 database.sqlite3 < $(OUTPUT)/stopwordsallforms.sql
-	sqlite3 database.sqlite3 < $(OUTPUT)/stopwords_classified.sql
+	mkdir -p $(BUILD)/sqlite
+	sqlite3 $(BUILD)/sqlite/database.sqlite < $(OUTPUT)/stopwordsallforms.sql
+	sqlite3 $(BUILD)/sqlite/database.sqlite < $(OUTPUT)/stopwords_classified.sql
+	# create indexes
+	sqlite3 $(BUILD)/sqlite/database.sqlite "CREATE INDEX idx_voc ON stopwords (unvocalized);"
+	sqlite3 $(BUILD)/sqlite/database.sqlite  "CREATE INDEX idx_voc_class ON classedstopwords (word);"
 install:
 	# install arabicstopwords library
 	cd python_lib;python setup.py install
