@@ -23,21 +23,41 @@
 #  
 
 import pyarabic.araby as araby
-from stopwordsallforms import STOPWORDS
+from stopwordsallforms import STOPWORDS, STOPWORDS_INDEX
+from stopwords_classified import STOPWORDS as classed_STOPWORDS
 def is_stop(word):
     """ test if word is a stop"""
     return word in STOPWORDS
 
-def stop_stem(word):
+def stop_stemlist(word):
     """ test if word is a stop"""
-    stem = ""
+    stemlist = []
     if word in STOPWORDS:
-        stem = STOPWORDS.get(word,{}).get('stem','')
-        stem = araby.strip_tashkeel(stem)
-    return stem
-def stopwordslist():
+        stemlist = [d.get('stem','') for d in STOPWORDS[word] ]    
+    return stemlist
+def stop_stem(word):
+    """ retrun a stem of a stop word """
+    stemlist = stop_stemlist(word)
+    if stemlist:
+        return stemlist[0]
+    else:
+        return ""
+    
+def stopwords_list():
     """ return all arabic stopwords"""
     return STOPWORDS.keys()
+    
+def classed_stopwords_list():
+    """ return all arabic classified  stopwords"""
+    return classed_STOPWORDS.keys()
+    
+def stopword_forms(word):
+    """ return all forms for a stop word"""
+    if word in STOPWORDS_INDEX:
+        return [d for d in STOPWORDS_INDEX[word] ]
+    else:
+        return []
+    
 def main(args):
     word = u"لعلهم"
     print stop_stem(word)
@@ -45,6 +65,7 @@ def main(args):
     
 if __name__ == '__main__':
     import sys
+    from pyarabic.arabrepr import arepr
     words = [(u'منكم', True),
             (u'ممكن', False),
             (u'عندما', True),
@@ -55,4 +76,9 @@ if __name__ == '__main__':
         if result != rep:
             print((u"Error %s is %swhere must be %s"%(w, result, rep)).encode('utf8'))
 
-    print len(stopwordslist())
+    print(len(stopwords_list()))
+    print(len(classed_stopwords_list()))
+    print(arepr(stopword_forms(u'حتى')))
+    print(arepr(stopword_forms(u'جميع')))
+    print(arepr(stop_stem(u'لجميعهم')))
+    print(arepr(stop_stem(u'لجم')))
