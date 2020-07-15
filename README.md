@@ -7,6 +7,7 @@ for this purpos, we propose a  classified list which can be parametered by  deve
 
 The Word list contains only wonds in its commun forms, and we have generated all forms by a script.
 
+It can used as library 'see section arabicstopwords library'
 
 ## Files
 
@@ -58,5 +59,43 @@ make
 ```
 * catch the output of script in releases folder.
 
-Thanks
+## Arabic Stopwords Library
+### install
+``` shell
+pip install arabicstopwords
+```
+### usage
+* test if a word is stop
+``` python
+>>> import arabicstopwords.arabicstopwords as stp
+>>> # test if a word is a stop
+... stp.is_stop(u'ممكن')
+False
+>>> stp.is_stop(u'منكم')
+True
+```
+* stem a stopword
+```python
+>>> word = u"لعلهم"
+>>> stp.stop_stem(word)
+u'لعل'
+
+```
+* list all stop words
+```
+>>> stp.stopwords_list()
+......
+>>> len(stp.stopwords_list())
+13629
+>>> len(stp.classed_stopwords_list())
+ 507
+```
+* give all forms of a stopword
+```python
+>>> stp.stopword_forms(u"على")
+....
+>>> len(stp.stopword_forms(u"على"))
+144
+```
+
  

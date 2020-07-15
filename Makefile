@@ -82,11 +82,7 @@ sqlite:
 	# create indexes
 	sqlite3 $(BUILD)/sqlite/database.sqlite "CREATE INDEX idx_voc ON stopwords (unvocalized);"
 	sqlite3 $(BUILD)/sqlite/database.sqlite  "CREATE INDEX idx_voc_class ON classedstopwords (word);"
-install:
-	# install arabicstopwords library
-	cd python_lib;python setup.py install
-publish:
-	git push origin master
+
 wheel:
 	cd python_lib;sudo python setup.py bdist_wheel
 wheel3:
@@ -99,5 +95,12 @@ sdist:
 	cd python_lib;sudo python setup.py sdist
 upload:
 	echo "use twine upload dist/arabicstopwords-0.6-py2-none-any.whl"
+
 test:
-	python python_lib/arabicstopwords/arabicstopwords.py
+	cd python_lib;python -m unittest discover tests
+test3:
+	cd python_lib;python3 -m unittest discover tests
+md2html:
+	pandoc -s -r markdown -w html README.md -o README.html
+md2rst:
+	pandoc -s -r markdown -w rst README.md -o python_lib/README.rst
