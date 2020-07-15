@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 from setuptools import setup
 
 # to install type:
@@ -7,7 +8,7 @@ from io import open
 def readme():
     with open('README.rst', encoding="utf8") as f:
         return f.read()
-setup (name='Arabic Stopwords', version='0.3',
+setup (name='Arabic_Stopwords', version='0.3',
       description='Arabic Stop words: list and routins',
       long_description = readme(),      
       author='Taha Zerrouki',

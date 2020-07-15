@@ -92,7 +92,7 @@ install:
 install3:
 	cd python_lib;sudo python3 setup.py install
 sdist:
-	cd python_lib;sudo python setup.py sdist
+	cd python_lib;sudo python3 setup.py sdist
 upload:
 	echo "use twine upload dist/arabicstopwords-0.6-py2-none-any.whl"
 
