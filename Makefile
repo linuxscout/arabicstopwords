@@ -5,7 +5,7 @@ RELEASES :=releases
 BUILD :=$(RELEASES)/build
 OUTPUT :=tests/output
 SCRIPT :=scripts
-VERSION=0.6
+VERSION=0.7
 DOC="."
 FORMAT:=csv
 default: all
@@ -41,9 +41,9 @@ py sql csv:
 	#Generate Specific format CSV SQL and python
 	echo " Generate ${FORMAT} version"
 	# all forms
-	python $(SCRIPT)/generate_stopwords_format.py -v $(VERSION) -a -f $(OUTPUT)/stopwords.csv -o ${FORMAT}    >$(OUTPUT)/stopwordsallforms.${FORMAT}
+	python3 $(SCRIPT)/generate_stopwords_format.py -v $(VERSION) -a -f $(OUTPUT)/stopwords.csv -o ${FORMAT}    >$(OUTPUT)/stopwordsallforms.${FORMAT}
 	# classified
-	python $(SCRIPT)/generate_stopwords_format.py -v $(VERSION) -f $(OUTPUT)/stopwords.csv -o ${FORMAT}    > $(OUTPUT)/stopwords_classified.${FORMAT}
+	python3 $(SCRIPT)/generate_stopwords_format.py -v $(VERSION) -f $(OUTPUT)/stopwords.csv -o ${FORMAT}    > $(OUTPUT)/stopwords_classified.${FORMAT}
 
 
 #packaging 
@@ -84,12 +84,8 @@ sqlite:
 	sqlite3 $(BUILD)/sqlite/database.sqlite  "CREATE INDEX idx_voc_class ON classedstopwords (word);"
 
 wheel:
-	cd python_lib;sudo python setup.py bdist_wheel
-wheel3:
 	cd python_lib;sudo python3 setup.py bdist_wheel
 install:
-	cd python_lib;sudo python setup.py install
-install3:
 	cd python_lib;sudo python3 setup.py install
 sdist:
 	cd python_lib;sudo python3 setup.py sdist
@@ -97,8 +93,6 @@ upload:
 	echo "use twine upload dist/arabicstopwords-0.6-py2-none-any.whl"
 
 test:
-	cd python_lib;python -m unittest discover tests
-test3:
 	cd python_lib;python3 -m unittest discover tests
 md2html:
 	pandoc -s -r markdown -w html README.md -o README.html
