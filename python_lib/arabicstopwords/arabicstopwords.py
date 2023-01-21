@@ -21,12 +21,6 @@
 #  MA 02110-1301, USA.
 #  
 #  
-from __future__ import (
-    absolute_import,
-    print_function,
-    unicode_literals,
-    division,
-    )
 import pyarabic.araby as araby
 try:
     from stopwordsallforms import STOPWORDS, STOPWORDS_INDEX
@@ -54,7 +48,7 @@ def stop_stem(word):
     
 def stopwords_list():
     """ return all arabic stopwords"""
-    return STOPWORDS.keys()
+    return list(STOPWORDS.keys())
     
 def classed_stopwords_list():
     """ return all arabic classified  stopwords"""
@@ -66,6 +60,8 @@ def stopword_forms(word):
         return [d for d in STOPWORDS_INDEX[word] ]
     else:
         return []
+
+    
     
 def main(args):
     word = u"لعلهم"
