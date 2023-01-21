@@ -137,7 +137,7 @@ class CsvDict:
                 try:
                     items.append(unicode(fields.get(key, key)))
                 except:
-                    print "error", fields
+                    print("error", fields)
             lines.append(u"\t".join(items))
         
         return u"\n".join(lines)
@@ -162,8 +162,8 @@ class CsvDict:
             try:
                 fields[key] = tuple_stop[self.field_id[key]].strip();
             except IndexError:
-                print "#"*5, "key error [%s],"%key, self.field_id[key], len(tuple_stop);
-                print (u"\t".join(tuple_stop)).encode('utf8')
+                print("#"*5, "key error [%s],"%key, self.field_id[key], len(tuple_stop));
+                print(u"\t".join(tuple_stop))#.encode('utf8')
                 sys.exit()
         # treat special tuples
         fields['word'] = araby.strip_tashkeel(fields['vocalized'])

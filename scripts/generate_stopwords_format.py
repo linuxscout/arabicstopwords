@@ -47,7 +47,7 @@ def main():
     #~ print(filename, outputformat, allforms, version)
     #~ sys.exit()
 
-    outputformat = string.lower(outputformat)
+    outputformat = outputformat.lower()
     if outputformat not in ('csv', 'python', 'py', 'sql'):
         outputformat='csv';
         #~ print "--~# generated format", outputformat
@@ -72,9 +72,9 @@ def main():
     try:
         fl=open(filename);
     except :
-        print " Error :No such file or directory: %s" % filename
+        print(" Error :No such file or directory: %s" % filename)
         return None;
-    line=fl.readline().decode("utf8");
+    line=fl.readline()#.decode("utf8");
     text=u""
     limit=10000;
     nb_fields = 9
@@ -86,18 +86,18 @@ def main():
             if len(liste) >= nb_fields:
                 stop_table.append(liste);
 
-        line=fl.readline().decode("utf8");
+        line=fl.readline()#.decode("utf8");
     fl.close();
     # create header
-    line =  mydict.add_header().encode('utf8')
-    if line:  print line
+    line =  mydict.add_header()#.encode('utf8')
+    if line:  print(line)
     for tuple_stop in stop_table[:limit]:
-        line = mydict.add_record(tuple_stop).encode('utf8')
+        line = mydict.add_record(tuple_stop)#.encode('utf8')
         if line: 
-            print line
+            print(line)
     # create footer
-    line = mydict.add_footer().encode('utf8')                  
-    if line:  print line
+    line = mydict.add_footer()#.encode('utf8')                  
+    if line:  print(line)
 if __name__ == "__main__":
   main()
 

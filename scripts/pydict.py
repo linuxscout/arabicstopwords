@@ -90,13 +90,18 @@ class PyDict(csvdict.CsvDict):
         """close the data set, used for ending xml, or sql"""
         
         text = "STOPWORDS="
-        text += arepr(self.STOPWORDS).decode('utf8')
+        text += repr(self.STOPWORDS)
         if self.generate_all_forms : 
             text += "\n\nSTOPWORDS_INDEX="     
-            text += arepr(self.STOPWORDS_INDEX).decode('utf8')
+            textindex = repr(self.STOPWORDS_INDEX)
+            textindex = "{" + textindex[1:].replace('{', 'set([')   
+            textindex = textindex[:-1].replace('}', '])') + "\n}\n"
+
+            text +=  textindex             
         # add newlines for more readability
         text = text.replace('}],', '}],\n')
         text = text.replace('],', '],\n')            
         text = text.replace('),', '),\n')            
+        text = text.replace('},', '},\n')            
         
         return text
