@@ -74,6 +74,7 @@ False
 >>> stp.is_stop(u'منكم')
 True
 ```
+
 * stem a stopword
 ```python
 >>> word = u"لعلهم"
@@ -99,3 +100,43 @@ u'لعل'
 ```
 
  
+* get stopword as list of dictionaries
+``` python
+>>> from arabicstopwords.stopwords_lexicon import stopwords_lexicon 
+>>> lexicon = stopwords_lexicon()
+>>> # test if a word is a stop
+... lexicon.is_stop(u'ممكن')
+False
+>>> lexicon.is_stop(u'منكم')
+True
+>>> lexicon.get_features_dict(u'منكم')
+[{'vocalized': 'منكم', 'procletic': '', 'tags': 'حرف;حرف جر;ضمير', 'stem': 'من', 'type': 'حرف', 'original': 'من', 'encletic': '-كم'}]
+```
+
+* get stopword as tuple
+``` python
+>>> from arabicstopwords.stopwords_lexicon import stopwords_lexicon 
+>>> lexicon = stopwords_lexicon()
+>>> tuples = lexicon.get_stopwordtuples(u'منكم')
+>>> tuples
+[<stopwordtuple.stopwordTuple object at 0x7fd93b3d12b0>]
+>>> for tup in tuples:
+...     print(tup)
+... 
+{'vocalized': 'منكم', 'procletic': '', 'tags': 'حرف;حرف جر;ضمير', 'stem': 'من', 'type': 'حرف', 'original': 'من', 'encletic': '-كم'}
+>>> >>> for tup in tuples:
+...     dir(tup)
+... 
+['accept_conjuction', 'accept_conjugation', 'accept_definition', 'accept_inflection', 'accept_interrog', 'accept_preposition', 'accept_pronoun', 'accept_qasam', 'accept_tanwin', 'get_action', 'get_enclitic', 'get_feature', 'get_features_dict', 'get_lemma', 'get_need', 'get_object_type', 'get_procletic', 'get_stem', 'get_tags', 'get_vocalized', 'get_wordclass', 'get_wordtype', 'is_defined', 'stop_dict']
+>>> 
+```
+
+* get stopword by categories
+``` python
+>>> from arabicstopwords.stopwords_lexicon import stopwords_lexicon 
+>>> lexicon = stopwords_lexicon()
+>>> lexicon.get_categories()
+['حرف', 'ضمير', 'فعل', 'اسم', 'اسم فعل', 'حرف ابجدي']
+>>> lexicon.get_by_category("اسم فعل", lemma=True, vocalized=True)
+['آهاً', 'بَسّْ', 'بَسْ', 'حَايْ', 'صَهْ', 'صَهٍ', 'طَاقْ', 'طَقْ', 'عَدَسْ', 'كِخْ', 'نَخْ', 'هَجْ', 'وَا', 'وَا', 'وَاهاً', 'وَيْ', 'آمِينَ', 'آهٍ', 'أُفٍّ', 'أُفٍّ', 'أَمَامَكَ', 'أَوَّهْ', 'إِلَيْكَ', 'إِلَيْكُمْ', 'إِلَيْكُمَا', 'إِلَيْكُنَّ', 'إيهِ', 'بخٍ', 'بُطْآنَ', 'بَلْهَ', 'حَذَارِ', 'حَيَّ', 'دُونَكَ', 'رُوَيْدَكَ', 'سُرْعَانَ', 'شَتَّانَ', 'عَلَيْكَ', 'مَكَانَكَ', 'مَكَانَكِ', 'مَكَانَكُمْ', 'مَكَانَكُمَا', 'مَكَانَكُنَّ', 'مَهْ', 'هَا', 'هَاؤُمُ', 'هَاكَ', 'هَلُمَّ', 'هَيَّا', 'هِيتَ', 'هَيْهَاتَ', 'وَرَاءَكَ', 'وَرَاءَكِ', 'وُشْكَانَ', 'وَيْكَأَنَّ', 'وَرَاءَكُما', 'وَرَاءَكُمْ', 'وَرَاءَكُنَّ', 'بِئْسَمَا']
+```

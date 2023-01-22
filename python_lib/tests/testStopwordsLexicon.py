@@ -81,19 +81,36 @@ class StopWordsTestCase(unittest.TestCase):
         result = ['ضمير متصل مجرور', 'حرف استدراك', 'إن و أخواتها'] 
         self.assertCountEqual(self.lexicon.get_wordclass(word), result)
         word = "لَكِنَّ"
-        self.assertEqual(self.lexicon.accept_conjuction(word), True)
-        self.assertEqual(self.lexicon.accept_definition(word), False)
-        self.assertEqual(self.lexicon.accept_preposition(word), False)
-        self.assertEqual(self.lexicon.accept_pronoun(word), True)
-        self.assertEqual(self.lexicon.accept_interrog(word), False)
-        self.assertEqual(self.lexicon.accept_conjugation(word), False)
-        self.assertEqual(self.lexicon.accept_qasam(word), False)
-        self.assertEqual(self.lexicon.is_defined(word), False)
-        self.assertEqual(self.lexicon.accept_inflection(word), False)
-        self.assertEqual(self.lexicon.accept_tanwin(word), False)
-        self.assertEqual(self.lexicon.get_action(word), "ناصب")
-        self.assertEqual(self.lexicon.get_object_type(word), "اسم")
-        self.assertEqual(self.lexicon.get_need(word), "")
+        word_tuple_list = self.lexicon.get_stopwordtuples(word, lemma=True, vocalized=True)
+        self.assertNotEqual(word_tuple_list, [])        
+        word_tuple = word_tuple_list[0]
+        self.assertEqual(word_tuple.get_feature("vocalized"), word)
+        self.assertEqual(word_tuple.accept_conjuction(), True)
+        self.assertEqual(word_tuple.accept_definition(), False)
+        self.assertEqual(word_tuple.accept_preposition(), False)
+        self.assertEqual(word_tuple.accept_pronoun(), True)
+        self.assertEqual(word_tuple.accept_interrog(), False)
+        self.assertEqual(word_tuple.accept_conjugation(), False)
+        self.assertEqual(word_tuple.accept_qasam(), False)
+        self.assertEqual(word_tuple.is_defined(), False)
+        self.assertEqual(word_tuple.accept_inflection(), False)
+        self.assertEqual(word_tuple.accept_tanwin(), False)
+        self.assertEqual(word_tuple.get_action(), "ناصب")
+        self.assertEqual(word_tuple.get_object_type(), "اسم")
+        self.assertEqual(word_tuple.get_need(), "")        
+        # ~ self.assertEqual(self.lexicon.accept_conjuction(word), True)
+        # ~ self.assertEqual(self.lexicon.accept_definition(word), False)
+        # ~ self.assertEqual(self.lexicon.accept_preposition(word), False)
+        # ~ self.assertEqual(self.lexicon.accept_pronoun(word), True)
+        # ~ self.assertEqual(self.lexicon.accept_interrog(word), False)
+        # ~ self.assertEqual(self.lexicon.accept_conjugation(word), False)
+        # ~ self.assertEqual(self.lexicon.accept_qasam(word), False)
+        # ~ self.assertEqual(self.lexicon.is_defined(word), False)
+        # ~ self.assertEqual(self.lexicon.accept_inflection(word), False)
+        # ~ self.assertEqual(self.lexicon.accept_tanwin(word), False)
+        # ~ self.assertEqual(self.lexicon.get_action(word), "ناصب")
+        # ~ self.assertEqual(self.lexicon.get_object_type(word), "اسم")
+        # ~ self.assertEqual(self.lexicon.get_need(word), "")
     
     def test_get_features_forms(self,):
         """Test Extract Features for inflected forms"""
@@ -110,6 +127,54 @@ class StopWordsTestCase(unittest.TestCase):
         self.assertEqual(self.lexicon.get_enclitics(word), [])
         self.assertEqual(self.lexicon.get_procletics(word), [])
         self.assertEqual(self.lexicon.get_lemmas(word), ['لكن'])
+        
+    def test_get_tuple_forms(self,):
+        """Test Extract Features for inflected forms"""
+        # ~ word = "لَكِنَّ"
+        word = "لكن"
+        word_tuple_list = self.lexicon.get_stopwordtuples(word, lemma=False, vocalized=True)
+        self.assertNotEqual(word_tuple_list, [])        
+        word_tuple = word_tuple_list[0]
+        
+        self.assertEqual(word_tuple.get_feature("stem"), 'لكن')
+        self.assertEqual(word_tuple.get_vocalized(),  'لكن')
+        self.assertEqual(word_tuple.get_wordtype(),  'ضمير')        
+        result = ['حرف;إن و أخواتها', 'حرف;حرف استدراك', ]
+        self.assertEqual(word_tuple.get_tags(), "ضمير;ضمير متصل مجرور")
+        self.assertEqual(word_tuple.get_stem(), 'لكن')
+        self.assertEqual(word_tuple.get_enclitic(), "")
+        self.assertEqual(word_tuple.get_procletic(), "")
+        self.assertEqual(word_tuple.get_lemma(), 'لكن')
+    def test_get_tuple_str(self,):
+        """Test Extract Features for inflected forms"""
+        # ~ word = "لَكِنَّ"
+        word = "لكن"
+        word_tuple_list = self.lexicon.get_stopwordtuples(word, lemma=False, vocalized=True)
+        self.assertNotEqual(word_tuple_list, [])        
+        word_tuple = word_tuple_list[0]
+        result ="""{'vocalized': 'لكن', 'procletic': '', 'tags': 'ضمير;ضمير متصل مجرور', 'stem': 'لكن', 'type': 'ضمير', 'original': 'لكن', 'encletic': ''}"""
+        self.assertEqual(str(word_tuple), result)
+        
+    def test_get_stopwords_by_categories(self,):
+        """Test Extract Features for inflected forms"""
+        category = "اسم فعل"
+        expected_categories = ['حرف', 'ضمير', 'فعل', 'اسم', 'اسم فعل', 'حرف ابجدي']
+        words_forms = ['آها', 'بس', 'بس', 'حاي', 'صه', 'صه', 'طاق', 'طق', 'عدس', 'كخ', 'نخ', 'هج', 'وا', 'وا', 'واها', 'وي', 'آمين', 'وآمين', 'فآمين', 'آه', 'وآه', 'فآه', 'أف', 'أف', 'وأف', 'وأف', 'فأف', 'فأف', 'أمامك', 'وأمامك', 'فأمامك', 'أوه', 'وأوه', 'فأوه', 'إليك', 'وإليك', 'فإليك', 'إليكم', 'وإليكم', 'فإليكم', 'إليكما', 'وإليكما', 'فإليكما', 'إليكن', 'وإليكن', 'فإليكن', 'إيه', 'وإيه', 'فإيه', 'بخ', 'وبخ', 'فبخ', 'وبس', 'فبس', 'بطآن', 'وبطآن', 'فبطآن', 'بله', 'وبله', 'فبله', 'حذار', 'وحذار', 'فحذار', 'حي', 'وحي', 'فحي', 'دونك', 'ودونك', 'فدونك', 'رويدك', 'ورويدك', 'فرويدك', 'سرعان', 'وسرعان', 'فسرعان', 'شتان', 'وشتان', 'فشتان', 'عليك', 'وعليك', 'فعليك', 'مكانك', 'مكانك', 'ومكانك', 'ومكانك', 'فمكانك', 'فمكانك', 'مكانكم', 'ومكانكم', 'فمكانكم', 'مكانكما', 'ومكانكما', 'فمكانكما', 'مكانكن', 'ومكانكن', 'فمكانكن', 'مه', 'ها', 'هاؤم', 'وهاؤم', 'فهاؤم', 'هاك', 'هلم', 'هيا', 'هيت', 'وهيت', 'فهيت', 'هيهات', 'وراءك', 'وراءك', 'وشكان', 'ويكأن', 'ويكأني', 'ويكأني', 'ويكأنك', 'ويكأنه', 'ويكأنكم', 'ويكأنكن', 'ويكأنها', 'ويكأنهم', 'ويكأنهن', 'ويكأننا', 'ويكأنكما', 'ويكأنهما', 'وراءكما', 'وراءكم', 'وراءكن', 'بئسما', 'وبئسما', 'فبئسما']
+        words_forms_vocalized =['آها', 'بس', 'بس', 'حاي', 'صه', 'صه', 'طاق', 'طق', 'عدس', 'كخ', 'نخ', 'هج', 'وا', 'وا', 'واها', 'وي', 'آمين', 'وآمين', 'فآمين', 'آه', 'وآه', 'فآه', 'أف', 'أف', 'وأف', 'وأف', 'فأف', 'فأف', 'أمامك', 'وأمامك', 'فأمامك', 'أوه', 'وأوه', 'فأوه', 'إليك', 'وإليك', 'فإليك', 'إليكم', 'وإليكم', 'فإليكم', 'إليكما', 'وإليكما', 'فإليكما', 'إليكن', 'وإليكن', 'فإليكن', 'إيه', 'وإيه', 'فإيه', 'بخ', 'وبخ', 'فبخ', 'وبس', 'فبس', 'بطآن', 'وبطآن', 'فبطآن', 'بله', 'وبله', 'فبله', 'حذار', 'وحذار', 'فحذار', 'حي', 'وحي', 'فحي', 'دونك', 'ودونك', 'فدونك', 'رويدك', 'ورويدك', 'فرويدك', 'سرعان', 'وسرعان', 'فسرعان', 'شتان', 'وشتان', 'فشتان', 'عليك', 'وعليك', 'فعليك', 'مكانك', 'مكانك', 'ومكانك', 'ومكانك', 'فمكانك', 'فمكانك', 'مكانكم', 'ومكانكم', 'فمكانكم', 'مكانكما', 'ومكانكما', 'فمكانكما', 'مكانكن', 'ومكانكن', 'فمكانكن', 'مه', 'ها', 'هاؤم', 'وهاؤم', 'فهاؤم', 'هاك', 'هلم', 'هيا', 'هيت', 'وهيت', 'فهيت', 'هيهات', 'وراءك', 'وراءك', 'وشكان', 'ويكأن', 'ويكأني', 'ويكأني', 'ويكأنك', 'ويكأنه', 'ويكأنكم', 'ويكأنكن', 'ويكأنها', 'ويكأنهم', 'ويكأنهن', 'ويكأننا', 'ويكأنكما', 'ويكأنهما', 'وراءكما', 'وراءكم', 'وراءكن', 'بئسما', 'وبئسما', 'فبئسما']
+        words_lemmas = ['آها', 'بس', 'بس', 'حاي', 'صه', 'صه', 'طاق', 'طق', 'عدس', 'كخ', 'نخ', 'هج', 'وا', 'وا', 'واها', 'وي', 'آمين', 'آه', 'أف', 'أف', 'أمامك', 'أوه', 'إليك', 'إليكم', 'إليكما', 'إليكن', 'إيه', 'بخ', 'بطآن', 'بله', 'حذار', 'حي', 'دونك', 'رويدك', 'سرعان', 'شتان', 'عليك', 'مكانك', 'مكانك', 'مكانكم', 'مكانكما', 'مكانكن', 'مه', 'ها', 'هاؤم', 'هاك', 'هلم', 'هيا', 'هيت', 'هيهات', 'وراءك', 'وراءك', 'وشكان', 'ويكأن', 'وراءكما', 'وراءكم', 'وراءكن', 'بئسما']
+        words_lemmas_vocalized =  ['آهاً', 'بَسّْ', 'بَسْ', 'حَايْ', 'صَهْ', 'صَهٍ', 'طَاقْ', 'طَقْ', 'عَدَسْ', 'كِخْ', 'نَخْ', 'هَجْ', 'وَا', 'وَا', 'وَاهاً', 'وَيْ', 'آمِينَ', 'آهٍ', 'أُفٍّ', 'أُفٍّ', 'أَمَامَكَ', 'أَوَّهْ', 'إِلَيْكَ', 'إِلَيْكُمْ', 'إِلَيْكُمَا', 'إِلَيْكُنَّ', 'إيهِ', 'بخٍ', 'بُطْآنَ', 'بَلْهَ', 'حَذَارِ', 'حَيَّ', 'دُونَكَ', 'رُوَيْدَكَ', 'سُرْعَانَ', 'شَتَّانَ', 'عَلَيْكَ', 'مَكَانَكَ', 'مَكَانَكِ', 'مَكَانَكُمْ', 'مَكَانَكُمَا', 'مَكَانَكُنَّ', 'مَهْ', 'هَا', 'هَاؤُمُ', 'هَاكَ', 'هَلُمَّ', 'هَيَّا', 'هِيتَ', 'هَيْهَاتَ', 'وَرَاءَكَ', 'وَرَاءَكِ', 'وُشْكَانَ', 'وَيْكَأَنَّ', 'وَرَاءَكُما', 'وَرَاءَكُمْ', 'وَرَاءَكُنَّ', 'بِئْسَمَا']        
+
+      
+        self.assertCountEqual(self.lexicon.get_categories(), expected_categories)
+        
+        words = self.lexicon.get_by_category(category, lemma=False, vocalized=False)
+        self.assertCountEqual(words, words_forms)        
+        words = self.lexicon.get_by_category(category, lemma=False, vocalized=True)
+        self.assertCountEqual(words, words_forms_vocalized)                
+        words = self.lexicon.get_by_category(category, lemma=True, vocalized=False)
+        self.assertCountEqual(words, words_lemmas)                
+        words = self.lexicon.get_by_category(category, lemma=True, vocalized=True)
+        self.assertCountEqual(words, words_lemmas_vocalized)                
 
 
 
