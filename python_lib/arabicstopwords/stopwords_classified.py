@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 #*************************************
 ##Arabic Stop word list for morphology analysis and information retrival
-##Version        : 0.7
-##Generated at   : 2023/01/21:13:37 
+##Version        : 0.8
+##Generated at   : 2023/01/23:16:19 
 ##Author         : Taha Zerrouki
 ##Web            : http://arabicstopwords.sf.net
 ##Source         : http://github.com/linuxscout/arabicstopwords

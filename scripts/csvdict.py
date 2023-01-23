@@ -70,7 +70,7 @@ class CsvDict:
         #give the display order for text format display
         self.display_order= {}
         self.display_order[True] =[
-                'unvocalized',
+                'word',
                 'vocalized',
                 'type',
                 'category',
@@ -271,6 +271,7 @@ class CsvDict:
                     result_fields['vocalized'] = vocalized;
                     result_fields['tags'] = tags 
                     result_fields['unvocalized'] = araby.strip_tashkeel(vocalized)
+                    result_fields['word'] = araby.strip_tashkeel(vocalized)
                     parts = segmented.split('-')
                     if len(parts)>=5:
                         result_fields['procletic'] = parts[0]+"-"

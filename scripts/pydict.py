@@ -20,7 +20,8 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #  MA 02110-1301, USA.
 #  
-#  
+# 
+import sys
 import csvdict
 #~ import pyarabic.arabrepr.arepr as arepr
 from pyarabic.arabrepr import arepr
@@ -69,6 +70,7 @@ class PyDict(csvdict.CsvDict):
                     items.append(u"'%s':u'%s'"%(key, fields.get(key,'control')));
             #~ lines.append(u"STOPWORDS[u'%s']= {%s}"%(fields['word'], u', '.join(items)));
             key_word = fields['word']
+
             if key_word in self.STOPWORDS:
                 self.STOPWORDS[key_word].append(items_dict)
             else:
