@@ -26,7 +26,7 @@ import time
 import pyarabic.araby as araby
 import ar_stopwords 
 import sys
-
+from alyahmor.stopword_affixer import stopword_affixer
 class CsvDict:
     """ a virtual converter of data from table to specific format
     the data is big, then every function print string """
@@ -36,6 +36,7 @@ class CsvDict:
         """
         self.id = 0
         self.version = version
+        self.affixer = stopword_affixer()
         #~ self.generate_all_forms = True
         self.generate_all_forms = allforms
         #generic Header for project
@@ -47,7 +48,7 @@ class CsvDict:
                     "Web            : http://arabicstopwords.sf.net",
                     "Source         : http://github.com/linuxscout/arabicstopwords",
                     "*************************************",
-                    ] 
+                    ]
         self.field_id={
                 'vocalized': 0, 
                 'type_word': 1,
@@ -69,17 +70,18 @@ class CsvDict:
         #give the display order for text format display
         self.display_order= {}
         self.display_order[True] =[
+                'unvocalized',
                 'vocalized',
+                'type',
+                'category',
+                'original',
                 #~ 'stemmed',
                 #~ 'word',
                 #~ 'standard',
                 'procletic',
-                'tags',
-                'vocalized',
                 'stem',
-                'type',
-                'original',
                 'encletic', 
+                'tags',
                 ]
         self.display_order[False] =[
                 'word',
@@ -118,6 +120,8 @@ class CsvDict:
         add the header for new dict
         """
         line = "#" + "\n#".join(self.headerlines) + "\n"
+        #display columns names
+        line += "\t".join(self.display_order[self.generate_all_forms])
         #~ line += u"\t".join(["id", "word", "unvocalized" , "root" , "future_type" ,"triliteral"  , "transitive"  , "double_trans"  , "think_trans"  , "unthink_trans"  , "reflexive_trans"  , "past"  , "future"  ,  "imperative"  ," passive"  , " future_moode"  , "confirmed"])
         return line
          
@@ -135,7 +139,7 @@ class CsvDict:
                 key = self.display_order[self.generate_all_forms][k];
                 # some fields are integer, than we use str
                 try:
-                    items.append(unicode(fields.get(key, key)))
+                    items.append(str(fields.get(key, key)))
                 except:
                     print("error", fields)
             lines.append(u"\t".join(items))
@@ -150,7 +154,7 @@ class CsvDict:
         """ return string to  """
         pass;
 
-    def treat_tuple(self,tuple_stop):
+    def treat_tuple_old(self,tuple_stop):
         """ convert row data to specific fields
         return a dict of fields"""
         #~ self.id+=1;
@@ -210,5 +214,79 @@ class CsvDict:
                 result_fields['unvocalized'] = result_fields['standard']
                 
                 fields_table.append(result_fields)
+            return fields_table
+    def treat_tuple(self,tuple_stop):
+        """ convert row data to specific fields
+        return a dict of fields"""
+        #~ self.id+=1;
+        fields = {"id": self.id,}  # verb dict of fields
+        # word  tri root    future_type transitive  nb_trans    object_type reflexive_type  tenses  model   nb_case verb_cat    suggest
+                
+        #extract field from the stowprds tuple
+        for key in self.field_id.keys():
+            try:
+                fields[key] = tuple_stop[self.field_id[key]].strip();
+            except IndexError:
+                print("#"*5, "key error [%s],"%key, self.field_id[key], len(tuple_stop));
+                print(u"\t".join(tuple_stop))#.encode('utf8')
+                sys.exit()
+        # treat special tuples
+        fields['word'] = araby.strip_tashkeel(fields['vocalized'])
+        # change boolean fields
+        for key in self.boolean_fields:
+            if not fields[key]: 
+                fields[key] = 0
+            elif fields[key] == "*":
+                fields[key] = 0
+            else:
+                fields[key] = 1  
+        # generate all forms if requested
+        fields_table =[]
+        if not self.generate_all_forms:
+            return [fields, ];
+        else:
+            lemma = fields.get("word", "")
+            if lemma:
+                #tuple_table = ar_stopwords.generate_allforms(fields);
+                tuple_table = self.affixer.generate_forms(lemma, [fields])
+                # ~ print(tuple_table[10:])
+
+                for conj  in tuple_table:
+                    result_fields = {} 
+                    result_fields['type'] = fields.get("type_word", 'type_word')
+                    result_fields['category'] = fields.get("class_word", 'class_word')
+                    result_fields['original'] = lemma                
+                    """
+                    UNVOCALIZED TEXT NOT NULL,
+                    PROCLETIC TEXT,
+                    TAGS TEXT,
+                    VOCALIZED TEXT,
+                    STEM TEXT,
+                    TYPE TEXT,
+                    ORIGINAL TEXT,
+                    ENCLETIC TEXT
+                    """       
+                    vocalized, semivocalized, segmented, tags = conj     
+
+                    result_fields['vocalized'] = vocalized;
+                    result_fields['tags'] = tags 
+                    result_fields['unvocalized'] = araby.strip_tashkeel(vocalized)
+                    parts = segmented.split('-')
+                    if len(parts)>=5:
+                        result_fields['procletic'] = parts[0]+"-"
+                        result_fields['stem'] = parts[2]
+                        result_fields['encletic'] = "-"+parts[4] 
+                    else:
+                        result_fields['procletic'] = ""
+                        result_fields['stem'] = lemma
+                        result_fields['encletic'] = ""
+
+
+
+                    # ~ result_fields['stemmed'] = stemmed
+                    # ~ result_fields['word']      = araby.strip_tashkeel(result_fields['vocalized'])
+                    # ~ result_fields['standard']  = araby.strip_tashkeel(result_fields['vocalized']);
+                    
+                    fields_table.append(result_fields)
             return fields_table
             
