@@ -85,6 +85,7 @@ class StopWordsTestCase(unittest.TestCase):
         self.assertNotEqual(word_tuple_list, [])        
         word_tuple = word_tuple_list[0]
         self.assertEqual(word_tuple.get_feature("vocalized"), word)
+        self.assertEqual(word_tuple.get_unvocalized(),  'لكن')        
         self.assertEqual(word_tuple.accept_conjuction(), True)
         self.assertEqual(word_tuple.accept_definition(), False)
         self.assertEqual(word_tuple.accept_preposition(), False)
@@ -138,6 +139,7 @@ class StopWordsTestCase(unittest.TestCase):
         
         self.assertEqual(word_tuple.get_feature("stem"), 'لكن')
         self.assertEqual(word_tuple.get_vocalized(),  'لكن')
+        self.assertEqual(word_tuple.get_unvocalized(),  '')
         self.assertEqual(word_tuple.get_wordtype(),  'ضمير')        
         result = ['حرف;إن و أخواتها', 'حرف;حرف استدراك', ]
         self.assertEqual(word_tuple.get_tags(), "ضمير;ضمير متصل مجرور")
@@ -175,6 +177,14 @@ class StopWordsTestCase(unittest.TestCase):
         self.assertCountEqual(words, words_lemmas)                
         words = self.lexicon.get_by_category(category, lemma=True, vocalized=True)
         self.assertCountEqual(words, words_lemmas_vocalized)                
+    def test_get_attr(self,):
+        """Test Extract Features for inflected forms"""
+        
+        word = "لكن"
+        tuples = self.lexicon.get_stopwordtuples(word)
+        tupl = tuples[0]
+        self.assertCountEqual(tupl["stem"], "لكن")
+        self.assertCountEqual(tupl.get("stem", ""), "لكن")
 
 
 

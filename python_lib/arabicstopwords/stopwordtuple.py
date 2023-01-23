@@ -69,6 +69,12 @@ class stopwordTuple:
         """
         return self.stop_dict.get('vocalized','')
 
+    def get_unvocalized(self,):
+        """
+         return the unvocalized form fo a stopword
+        """
+        return self.stop_dict.get('word','')
+
 
     def get_wordtype(self,):
         """
@@ -230,6 +236,19 @@ class stopwordTuple:
         return tuple as string
         """
         return self.stop_dict.__str__()
+
+
+    def __getitem__(self, key):
+        """
+        return attribute
+        """
+        return self.stop_dict.get(key,None)
+        
+    def get(self, key, default):
+        """
+        return attribute
+        """
+        return self.stop_dict.get(key,default)
     
 def main(args):
     word = u"لعلهم"

@@ -28,8 +28,11 @@ try:
 except:
     from .stopwordsallforms import STOPWORDS, STOPWORDS_INDEX
     from .stopwords_classified import STOPWORDS as classed_STOPWORDS
-    
-from stopwordtuple import stopwordTuple
+try:
+    from stopwordtuple import stopwordTuple
+except:
+    from .stopwordtuple import stopwordTuple
+
 class stopwords_lexicon:
     """
     A lexicon class for stopwords extracttion features

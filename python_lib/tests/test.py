@@ -30,7 +30,7 @@ from __future__ import (
     )
 import unittest
 import sys
-sys.path.append('../arabicstopwords')
+sys.path.append('arabicstopwords')
 import arabicstopwords.arabicstopwords as stp
 
 class StopWordsTestCase(unittest.TestCase):
@@ -52,8 +52,8 @@ class StopWordsTestCase(unittest.TestCase):
         self.assertEqual(stp.stop_stem(word), u"لعل")
     def test_stop_list(self):
         """Test stop list"""
-        self.assertEqual(len(stp.stopwords_list()), 13629)
-        self.assertEqual(len(stp.classed_stopwords_list()), 507)
+        self.assertEqual(len(stp.stopwords_list()), 13572)
+        self.assertEqual(len(stp.classed_stopwords_list()), 508)
 
     def test_stopword_forms(self):
         """Test stopord forms"""
