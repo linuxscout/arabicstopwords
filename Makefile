@@ -106,7 +106,7 @@ test:
 md2html:
 	pandoc -s -r markdown -w html README.md -o README.html
 md2rst:
-	pandoc -s -r markdown -w rst README.md -o python_lib/README.rst
+	pandoc -s -r markdown -w rst README.md -o docs/source/index.rst
 build: wheel wheel3 install install3 sdist
 
 
