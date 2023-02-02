@@ -1,5 +1,53 @@
 # Arabic Stop words
+![ghalatawi logo](doc/arabicStopWordsheader.png "Arabic Stop Words logo")
 
+![PyPI - Downloads](https://img.shields.io/pypi/dm/Arabic-Stopwords)
+
+
+  Developpers:  Taha Zerrouki: http://tahadz.com
+    taha dot zerrouki at gmail dot com
+    
+Features |   value
+---------|---------------------------------------------------------------------------------
+Authors  | [Authors.md](https://github.com/linuxscout/arabicstopwords/main/AUTHORS.md)
+Release  | 0.8
+License  |[GPL](https://github.com/linuxscout/arabicstopwords/main/LICENSE)
+Tracker  |[linuxscout/arabicstopwords/Issues](https://github.com/linuxscout/arabicstopwords/issues)
+Source  |[Github](http://github.com/linuxscout/arabicstopwords)
+Website  |[ArabicStopwords on SourceForge](https://arabicstopwords.sf.net)
+Doc  |[package Documentaion](https://arabicstopwords.readthedocs.io/)
+Download  |[Python Library](https://pypi.python.org/pypi/https://pypi.org/project/Arabic-Stopwords/)
+Download  | Data set [CSV/SQL/Python](https://github.com/linuxscout/arabicstopwords/releases/latest)
+Feedbacks |[Comments](https://github.com/linuxscout/arabicstopwords/)
+Accounts  |[@Twitter](https://twitter.com/linuxscout))
+
+
+## Citation
+If you would cite it in academic work, can you use this citation
+```
+T. Zerrouki‏, Arabic Stop Words,  https://github.com/linuxscout/arabicstopwords/, 2010
+```
+Another Citation:
+```
+Zerrouki, Taha. "Towards An Open Platform For Arabic Language Processing." (2020).
+```
+
+or in bibtex format
+```bibtex
+@misc{zerrouki2010arabicstopwords,
+  title={Arabic Stop Words},
+  author={Zerrouki, Taha},
+  url={https://github.com/linuxscout/arabicstopwords},
+  year={2010}
+}
+@thesis{zerrouki2020towards,
+  title={Towards An Open Platform For Arabic Language Processing},
+  author={Zerrouki, Taha},
+  year={2020}
+}
+
+
+```
 ## Description
 
 It's not easy to detemine the stop words, and in other hand, stop words differs according to the case,
@@ -16,11 +64,18 @@ It can used as library 'see section arabicstopwords library'
 * docs: docs files
 * scripts: scripts used to generate all forms, and file formats
 
-## Data Structure
---------------
-All forms data .ODS/CSV file 
-- 1st field : unvocalised word ( في)
-- 2nd field : unvocalised stemmed word with -'-' between affixes: e.g. ف-ب-خمسين-ي
+## Data
+This project contains two parts:
+- Data part, which contains classified stopwords, or all generated forms, in multiple  format
+  - CSV
+  - Python
+  - SQL / Sqlite
+- Python library for handling stopwords.
+
+### Data Structure
+Two fromats of data are given:
+- classified words (lemma) with features to generate inflected froms
+- Generated forms from lemmas with adding affixes.
 
 ![Stopwords Example](doc/images/stopwords.png  "Stopwords Example")
     
@@ -38,6 +93,25 @@ Affixation infomration in other fields:
 -    8th field : LAM in arabic , if word accept LAM QASAM   articles 'لام القسم', '*' else       
 -    8th field : MEEM in arabic , if word has ALEF LAM as definition article 'معرف', '*' else        
 
+
+All forms data CSV file
+- 1st field : unvocalised word ( بأنك)
+- 2nd field : vocalised inflected word with : e.g. ف-ب-خمسين-ي
+- 3rd field:  word type (super class): noun, verb, tool حرف
+- 4th field:  word type (sub class): إنّ وأخواتها 
+- 5th field:  original or lemma: إن
+- 6th field:  procletic : ب
+- 7th field:  stem : أن
+- 8th field:  encletic: ك
+- 9th field:  tags: جر:مضاف
+
+
+
+```csv
+word	vocalized	type	category	original	procletic	stem	encletic	tags
+بأنك	بِأَنّكَ	حرف	إن و أخواتها	أن	ب-		-ك	جر:مضاف
+بأنكما	بِأَنّكُمَا	حرف	إن و أخواتها	أن	ب-		-كما	جر:مضاف
+```
 ## How to customize stop word list
 
 * check the minimal form data file (stopwords.csv)
