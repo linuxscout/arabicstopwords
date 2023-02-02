@@ -1,5 +1,5 @@
 # Arabic Stop words
-![ghalatawi logo](doc/arabicStopWordsheader.png "Arabic Stop Words logo")
+![Arabic Stop words logo](doc/arabicStopWordsheader.png "Arabic Stop Words logo")
 
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/Arabic-Stopwords)
 

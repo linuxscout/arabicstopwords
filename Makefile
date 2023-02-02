@@ -7,6 +7,7 @@ OUTPUT :=tests/output
 SCRIPT :=scripts
 VERSION=0.9
 DOC="."
+DATE=$(shell date +'%y.%m.%d-%H:%M')
 FORMAT:=csv
 default: all
 # Clean build files
@@ -72,9 +73,14 @@ pack:
 	mkdir -p $(BUILD)/csv
 	cp -f $(OUTPUT)/stopwordsallforms.csv $(BUILD)/csv/
 	cp -f $(OUTPUT)/stopwords_classified.csv $(BUILD)/csv/
+	# corpus
+	mkdir -p $(BUILD)/corpus
+	cp -f $(OUTPUT)/tashkeela_stopwords_frequency.csv $(BUILD)/corpus/
+	cp -f $(OUTPUT)/wiki_stopwords_frequency.csv $(BUILD)/corpus/
 	#zip
 	cd $(BUILD) && tar cfj arabicstopwords.$(VERSION).tar.bz2 * 
 	mv $(BUILD)/arabicstopwords.$(VERSION).tar.bz2 $(RELEASES)/
+	# latest
 	cp $(BUILD)/* -r  $(RELEASES)/latest/
 	# add files to leatest release
 
@@ -102,3 +108,33 @@ md2html:
 md2rst:
 	pandoc -s -r markdown -w rst README.md -o python_lib/README.rst
 build: wheel wheel3 install install3 sdist
+
+
+wiki:CORPUS_INPUT= samples/wiki_wordsfreq.txt
+wiki:CORPUS_OUTPUT= tests/output/wiki_stopwords_frequency.csv
+wiki:CORPUS_VERSION= samples/.csv
+wiki:CORPUS_NAME=Arabic Wikippedia
+wiki:CORPUS_COMMENT=useful for Standard Modern Arabic
+tashkeela:CORPUS_INPUT= samples/tashkeela_unvocalized_freq.txt
+tashkeela:CORPUS_OUTPUT= tests/output/tashkeela_stopwords_frequency.csv
+tashkeela:CORPUS_VERSION= samples/.csv
+tashkeela:CORPUS_NAME=Tahskeela
+tashkeela:CORPUS_COMMENT=useful for Classical Arabic
+tashkeela wiki:
+	# extract  frequent stopwords from Tahskeela Corpus
+	echo "##*************************************"> $(CORPUS_OUTPUT)
+	echo "#Arabic Stop word list for morphology analysis and information retrival">> $(CORPUS_OUTPUT)
+	echo "#  Most frequent stopwords in $(CORPUS_NAME) Corpus, $(CORPUS_COMMENT)">> $(CORPUS_OUTPUT)
+	echo "#Corpus Version $(CORPUS_VERSION): ">> $(CORPUS_OUTPUT)
+	echo "#Version        : $(VERSION)">> $(CORPUS_OUTPUT)
+	echo "#Generated at   : $(DATE) ">> $(CORPUS_OUTPUT)
+	echo "#Author         : Taha Zerrouki "   >> $(CORPUS_OUTPUT)
+	echo "#Web            : http://arabicstopwords.sf.net">> $(CORPUS_OUTPUT)
+	echo "#Source         : http://github.com/linuxscout/arabicstopwords">> $(CORPUS_OUTPUT)
+	echo "#*************************************">> $(CORPUS_OUTPUT)
+	cd tests;python3 tashkeela_stowprd_frequenty.py -f $(CORPUS_INPUT) >> ../$(CORPUS_OUTPUT)
+
+swap:
+	awk ' { t = $1; $1 = $2; $2 = t; print; } ' tests/samples/wiki_wordsfreq.txt > wiki_wordsfreq.inv.txt
+corpus: wiki tashkeela
+	cp -f $(OUTPUT)/stopwords_classified.sql $(BUILD)/sql/
