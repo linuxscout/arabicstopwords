@@ -20,6 +20,7 @@ Download  |[Python Library](https://pypi.python.org/pypi/https://pypi.org/projec
 Download  | Data set [CSV/SQL/Python](https://github.com/linuxscout/arabicstopwords/releases/latest)
 Feedbacks |[Comments](https://github.com/linuxscout/arabicstopwords/)
 Accounts  |[@Twitter](https://twitter.com/linuxscout))
+Citation |[T. Zerrouki‏, Arabic Stop Words](#Citation)
 
 ## Description
 
@@ -198,13 +199,13 @@ True
 
 If you would cite it in academic work, can you use this citation
 
-```
+```text
 T. Zerrouki‏, Arabic Stop Words,  https://github.com/linuxscout/arabicstopwords/, 2010
 ```
 
 Another Citation:
 
-```
+```text
 Zerrouki, Taha. "Towards An Open Platform For Arabic Language Processing." (2020).
 ```
 
