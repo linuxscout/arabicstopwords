@@ -1,7 +1,9 @@
 /archive/
 *.pyc
 /tests/output/
-/releases/
+/releases/build/
+/releases/backup*
+/releases/*.bz2
 /scripts/pyarabic/
 407363ca219005730c1afd44d8868e7.svn-base
 /docs/مراسلات/الكلمات المستبعدة.doc
