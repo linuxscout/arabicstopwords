@@ -10,7 +10,7 @@
 Features |   value
 ---------|---------------------------------------------------------------------------------
 Authors  | [Authors.md](https://github.com/linuxscout/arabicstopwords/main/AUTHORS.md)
-Release  | 0.8
+Release  | 0.9
 License  |[GPL](https://github.com/linuxscout/arabicstopwords/main/LICENSE)
 Tracker  |[linuxscout/arabicstopwords/Issues](https://github.com/linuxscout/arabicstopwords/issues)
 Source  |[Github](http://github.com/linuxscout/arabicstopwords)
@@ -108,9 +108,9 @@ All forms data CSV file
 
 
 ```csv
-word	vocalized	type	category	original	procletic	stem	encletic	tags
-بأنك	بِأَنّكَ	حرف	إن و أخواتها	أن	ب-		-ك	جر:مضاف
-بأنكما	بِأَنّكُمَا	حرف	إن و أخواتها	أن	ب-		-كما	جر:مضاف
+word    vocalized   type    category    original    procletic   stem    encletic    tags
+بأنك    بِأَنّكَ    حرف إن و أخواتها    أن  ب-      -ك  جر:مضاف
+بأنكما  بِأَنّكُمَا حرف إن و أخواتها    أن  ب-      -كما    جر:مضاف
 ```
 ## How to customize stop word list
 

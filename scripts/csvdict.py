@@ -273,10 +273,10 @@ class CsvDict:
                     result_fields['unvocalized'] = araby.strip_tashkeel(vocalized)
                     result_fields['word'] = araby.strip_tashkeel(vocalized)
                     parts = segmented.split('-')
-                    if len(parts)>=5:
+                    if len(parts)>=4:
                         result_fields['procletic'] = parts[0]+"-"
-                        result_fields['stem'] = parts[2]
-                        result_fields['encletic'] = "-"+parts[4] 
+                        result_fields['stem'] = lemma
+                        result_fields['encletic'] = "-"+parts[3] 
                     else:
                         result_fields['procletic'] = ""
                         result_fields['stem'] = lemma

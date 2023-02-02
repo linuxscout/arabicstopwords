@@ -21,6 +21,8 @@
 #  MA 02110-1301, USA.
 #  
 #  
+__version__ = '0.4.3'
+__author__ = 'Taha Zerrouki'
 import pyarabic.araby as araby
 try:
     from stopwordsallforms import STOPWORDS, STOPWORDS_INDEX
