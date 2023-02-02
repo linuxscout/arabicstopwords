@@ -64,7 +64,7 @@ It can used as library 'see section arabicstopwords library'
 * docs: docs files
 * scripts: scripts used to generate all forms, and file formats
 
-##Data
+## Data
 This project contains two parts:
 - Data part, which contains classified stopwords, or all generated forms, in multiple  format
   - CSV
