@@ -16,11 +16,37 @@ It can used as library 'see section arabicstopwords library'
 * docs: docs files
 * scripts: scripts used to generate all forms, and file formats
 
-## Data Structure
---------------
+##Data
+This project contains two parts:
+- Data part, which contains classified stopwords, or all generated forms, in multiple  format
+  - CSV
+  - Python
+  - SQL / Sqlite
+- Python library for handling stopwords.
+
+### Data Structure
+Two fromat of data are given:
+- classified words (lemma) with features to generate inflected froms
+- Generated forms from lemmas with adding affixes.
+
 All forms data .ODS/CSV file 
-- 1st field : unvocalised word ( في)
-- 2nd field : unvocalised stemmed word with -'-' between affixes: e.g. ف-ب-خمسين-ي
+- 1st field : unvocalised word ( بأنك)
+- 2nd field : vocalised inflected word with : e.g. ف-ب-خمسين-ي
+- 3rd field:  word type (super class): noun, verb, tool حرف
+- 4th field:  word type (sub class): إنّ وأخواتها 
+- 5th field:  original or lemma: إن
+- 6th field:  procletic : ب
+- 7th field:  stem : أن
+- 8th field:  encletic: ك
+- 9th field:  tags: جر:مضاف
+
+
+
+```csv
+word	vocalized	type	category	original	procletic	stem	encletic	tags
+بأنك	بِأَنّكَ	حرف	إن و أخواتها	أن		أن		جر:مضاف
+بأنكما	بِأَنّكُمَا	حرف	إن و أخواتها	أن		أن		جر:مضاف
+```
 
 ![Stopwords Example](doc/images/stopwords.png  "Stopwords Example")
     
