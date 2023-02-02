@@ -132,7 +132,7 @@ tashkeela wiki:
 	echo "#Web            : http://arabicstopwords.sf.net">> $(CORPUS_OUTPUT)
 	echo "#Source         : http://github.com/linuxscout/arabicstopwords">> $(CORPUS_OUTPUT)
 	echo "#*************************************">> $(CORPUS_OUTPUT)
-	cd tests;python3 tashkeela_stowprd_frequenty.py -f $(CORPUS_INPUT) >> ../$(CORPUS_OUTPUT)
+	cd tests;python3 corpus_stopwor_frequency.py -f $(CORPUS_INPUT) >> ../$(CORPUS_OUTPUT)
 
 swap:
 	awk ' { t = $1; $1 = $2; $2 = t; print; } ' tests/samples/wiki_wordsfreq.txt > wiki_wordsfreq.inv.txt
