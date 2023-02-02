@@ -3,10 +3,10 @@
 
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/Arabic-Stopwords)
 
-
-  Developpers:  Taha Zerrouki: http://tahadz.com
+  Developers:  Taha Zerrouki: http://tahadz.com
     taha dot zerrouki at gmail dot com
     
+
 Features |   value
 ---------|---------------------------------------------------------------------------------
 Authors  | [Authors.md](https://github.com/linuxscout/arabicstopwords/main/AUTHORS.md)
@@ -21,55 +21,34 @@ Download  | Data set [CSV/SQL/Python](https://github.com/linuxscout/arabicstopwo
 Feedbacks |[Comments](https://github.com/linuxscout/arabicstopwords/)
 Accounts  |[@Twitter](https://twitter.com/linuxscout))
 
-
-## Citation
-If you would cite it in academic work, can you use this citation
-```
-T. Zerrouki‏, Arabic Stop Words,  https://github.com/linuxscout/arabicstopwords/, 2010
-```
-Another Citation:
-```
-Zerrouki, Taha. "Towards An Open Platform For Arabic Language Processing." (2020).
-```
-
-or in bibtex format
-```bibtex
-@misc{zerrouki2010arabicstopwords,
-  title={Arabic Stop Words},
-  author={Zerrouki, Taha},
-  url={https://github.com/linuxscout/arabicstopwords},
-  year={2010}
-}
-@thesis{zerrouki2020towards,
-  title={Towards An Open Platform For Arabic Language Processing},
-  author={Zerrouki, Taha},
-  year={2020}
-}
-
-
-```
 ## Description
 
 It's not easy to detemine the stop words, and in other hand, stop words differs according to the case,
 for this purpos, we propose a  classified list which can be parametered by  developper.
 
-The Word list contains only wonds in its commun forms, and we have generated all forms by a script.
+The Word list contains only words in its common forms, and we have generated all forms by a script.
 
-It can used as library 'see section arabicstopwords library'
+It can used as library 'see section [arabicstopwords](#Arabic-Stop-words-Library) library'
 
 ## Files
 
-* data/ : contains  data of stopwords
-* data/classified/stopwords.ods: data in LibreOffice format with more valuble informations, and classified stopwords
+* data-source/ : contains  source data of stopwords
+* data-source/classified/stopwords.ods: data in LibreOffice format with more valuble informations, and classified stopwords
+* releases/latest: csv/sql/python formats:
+  * Classified stop words (lemmas)
+  * Inflected forms
+  * Corpus based lists
+
 * docs: docs files
 * scripts: scripts used to generate all forms, and file formats
 
 ## Data
 This project contains two parts:
-- Data part, which contains classified stopwords, or all generated forms, in multiple  format
+- Data part, which contains classified stopwords, all generated forms,  in multiple  format
   - CSV
   - Python
   - SQL / Sqlite
+  - another list of most frequent in corpus like (Wikipedia and Tashkeela Corpus)
 - Python library for handling stopwords.
 
 ### Data Structure
@@ -85,13 +64,13 @@ Minimal classified  data .ODS/CSV file
 - 3rd field : class of word : e.g. preposition
 
 Affixation infomration in other fields:
--    4th field : AIN in arabic , if word accept Conjuction 'العطف', '*' else
--    5th field : TEH in arabic , if word accept definate article 'ال التعريف', '*' else
--    6th field : JEEM in arabic , if word accept preposition  article 'حروف الجر المتصلة', '*' else      
--    7th field : DAD in arabic , if word accept IDAFA  articles 'الضمائر المتصلة', '*' else              
--    7th field : SAD in arabic , if word accept verb conjugation  articles 'التصريف', '*' else       
--    8th field : LAM in arabic , if word accept LAM QASAM   articles 'لام القسم', '*' else       
--    8th field : MEEM in arabic , if word has ALEF LAM as definition article 'معرف', '*' else        
+-    4th field : AIN in Arabic , if word accept Conjunction 'العطف', '*' else
+-    5th field : TEH in Arabic , if word accept definate article 'ال التعريف', '*' else
+-    6th field : JEEM in Arabic , if word accept preposition  article 'حروف الجر المتصلة', '*' else      
+-    7th field : DAD in Arabic , if word accept IDAFA  articles 'الضمائر المتصلة', '*' else              
+-    7th field : SAD in Arabic , if word accept verb conjugation  articles 'التصريف', '*' else       
+-    8th field : LAM in Arabic , if word accept LAM QASAM   articles 'لام القسم', '*' else       
+-    8th field : MEEM in Arabic , if word has ALEF LAM as definition article 'معرف', '*' else        
 
 
 All forms data CSV file
@@ -133,12 +112,12 @@ make
 ```
 * catch the output of script in releases folder.
 
-## Arabic Stopwords Library
-### install
+## Arabic Stop words Library
+### Install
 ``` shell
 pip install arabicstopwords
 ```
-### usage
+### Usage
 * test if a word is stop
 ``` python
 >>> import arabicstopwords.arabicstopwords as stp
@@ -173,7 +152,7 @@ u'لعل'
 144
 ```
 
- 
+
 * get stopword as list of dictionaries
 ``` python
 >>> from arabicstopwords.stopwords_lexicon import stopwords_lexicon 
@@ -214,3 +193,37 @@ True
 >>> lexicon.get_by_category("اسم فعل", lemma=True, vocalized=True)
 ['آهاً', 'بَسّْ', 'بَسْ', 'حَايْ', 'صَهْ', 'صَهٍ', 'طَاقْ', 'طَقْ', 'عَدَسْ', 'كِخْ', 'نَخْ', 'هَجْ', 'وَا', 'وَا', 'وَاهاً', 'وَيْ', 'آمِينَ', 'آهٍ', 'أُفٍّ', 'أُفٍّ', 'أَمَامَكَ', 'أَوَّهْ', 'إِلَيْكَ', 'إِلَيْكُمْ', 'إِلَيْكُمَا', 'إِلَيْكُنَّ', 'إيهِ', 'بخٍ', 'بُطْآنَ', 'بَلْهَ', 'حَذَارِ', 'حَيَّ', 'دُونَكَ', 'رُوَيْدَكَ', 'سُرْعَانَ', 'شَتَّانَ', 'عَلَيْكَ', 'مَكَانَكَ', 'مَكَانَكِ', 'مَكَانَكُمْ', 'مَكَانَكُمَا', 'مَكَانَكُنَّ', 'مَهْ', 'هَا', 'هَاؤُمُ', 'هَاكَ', 'هَلُمَّ', 'هَيَّا', 'هِيتَ', 'هَيْهَاتَ', 'وَرَاءَكَ', 'وَرَاءَكِ', 'وُشْكَانَ', 'وَيْكَأَنَّ', 'وَرَاءَكُما', 'وَرَاءَكُمْ', 'وَرَاءَكُنَّ', 'بِئْسَمَا']
 ```
+
+## Citation
+
+If you would cite it in academic work, can you use this citation
+
+```
+T. Zerrouki‏, Arabic Stop Words,  https://github.com/linuxscout/arabicstopwords/, 2010
+```
+
+Another Citation:
+
+```
+Zerrouki, Taha. "Towards An Open Platform For Arabic Language Processing." (2020).
+```
+
+or in bibtex format
+
+```bibtex
+@misc{zerrouki2010arabicstopwords,
+  title={Arabic Stop Words},
+  author={Zerrouki, Taha},
+  url={https://github.com/linuxscout/arabicstopwords},
+  year={2010}
+}
+@thesis{zerrouki2020towards,
+  title={Towards An Open Platform For Arabic Language Processing},
+  author={Zerrouki, Taha},
+  year={2020}
+}
+
+
+```
+
+## 
