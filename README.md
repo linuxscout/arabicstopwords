@@ -109,10 +109,9 @@ All forms data CSV file
 
 ```csv
 word	vocalized	type	category	original	procletic	stem	encletic	tags
-بأنك	بِأَنّكَ	حرف	إن و أخواتها	أن		أن		جر:مضاف
-بأنكما	بِأَنّكُمَا	حرف	إن و أخواتها	أن		أن		جر:مضاف
+بأنك	بِأَنّكَ	حرف	إن و أخواتها	أن	ب-		-ك	جر:مضاف
+بأنكما	بِأَنّكُمَا	حرف	إن و أخواتها	أن	ب-		-كما	جر:مضاف
 ```
-
 ## How to customize stop word list
 
 * check the minimal form data file (stopwords.csv)
