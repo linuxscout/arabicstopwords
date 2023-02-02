@@ -1,9 +1,9 @@
 ##*************************************
 #Arabic Stop word list for morphology analysis and information retrival
-#  Most frequent stopwords in Tahskeela Corpus, useful for Classical Arabic
-#Corpus Version samples/.csv: 
+#  Most frequent stopwords in Tashkeela Corpus, useful for Classical Arabic
+#Corpus Version 1.0: 
 #Version        : 0.9
-#Generated at   : 23.02.02-12:12 
+#Generated at   : 23.02.02-12:50 
 #Author         : Taha Zerrouki 
 #Web            : http://arabicstopwords.sf.net
 #Source         : http://github.com/linuxscout/arabicstopwords

@@ -112,13 +112,13 @@ build: wheel wheel3 install install3 sdist
 
 wiki:CORPUS_INPUT= samples/wiki_wordsfreq.txt
 wiki:CORPUS_OUTPUT= tests/output/wiki_stopwords_frequency.csv
-wiki:CORPUS_VERSION= samples/.csv
+wiki:CORPUS_VERSION= 01-Feb-2023
 wiki:CORPUS_NAME=Arabic Wikippedia
 wiki:CORPUS_COMMENT=useful for Standard Modern Arabic
 tashkeela:CORPUS_INPUT= samples/tashkeela_unvocalized_freq.txt
 tashkeela:CORPUS_OUTPUT= tests/output/tashkeela_stopwords_frequency.csv
-tashkeela:CORPUS_VERSION= samples/.csv
-tashkeela:CORPUS_NAME=Tahskeela
+tashkeela:CORPUS_VERSION= 1.0
+tashkeela:CORPUS_NAME=Tashkeela
 tashkeela:CORPUS_COMMENT=useful for Classical Arabic
 tashkeela wiki:
 	# extract  frequent stopwords from Tahskeela Corpus
@@ -132,7 +132,7 @@ tashkeela wiki:
 	echo "#Web            : http://arabicstopwords.sf.net">> $(CORPUS_OUTPUT)
 	echo "#Source         : http://github.com/linuxscout/arabicstopwords">> $(CORPUS_OUTPUT)
 	echo "#*************************************">> $(CORPUS_OUTPUT)
-	cd tests;python3 corpus_stopwor_frequency.py -f $(CORPUS_INPUT) >> ../$(CORPUS_OUTPUT)
+	cd tests;python3 corpus_stopword_frequency.py -f $(CORPUS_INPUT) >> ../$(CORPUS_OUTPUT)
 
 swap:
 	awk ' { t = $1; $1 = $2; $2 = t; print; } ' tests/samples/wiki_wordsfreq.txt > wiki_wordsfreq.inv.txt

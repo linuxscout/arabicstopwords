@@ -1,9 +1,9 @@
 ##*************************************
 #Arabic Stop word list for morphology analysis and information retrival
 #  Most frequent stopwords in Arabic Wikippedia Corpus, useful for Standard Modern Arabic
-#Corpus Version samples/.csv: 
+#Corpus Version 01-Feb-2023: 
 #Version        : 0.9
-#Generated at   : 23.02.02-12:13 
+#Generated at   : 23.02.02-12:50 
 #Author         : Taha Zerrouki 
 #Web            : http://arabicstopwords.sf.net
 #Source         : http://github.com/linuxscout/arabicstopwords
