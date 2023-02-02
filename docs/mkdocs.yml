@@ -1,0 +1,22 @@
+site_name: Arabic Stop Words
+repo_url: https://github.com/linuxscout/arabicstopwords/
+repo_name: Arabic Stop Words
+site_url: http://tahadz.com
+nav:
+    - Home: README.md
+    - TahaDz.com: http://tahadz.com
+theme:
+  name: readthedocs
+  highlightjs: true
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        # See: https://mkdocstrings.github.io/python/usage/
+        python:
+          options:
+            docstring_style: sphinx
+markdown_extensions:
+  - markdown_include.include:
+      base_path: .
+  - admonition
