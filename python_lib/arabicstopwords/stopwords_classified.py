@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 #*************************************
 ##Arabic Stop word list for morphology analysis and information retrival
-##Version        : 0.8
-##Generated at   : 2023/01/23:16:19 
+##Version        : 0.9
+##Generated at   : 2023/02/02:08:53 
 ##Author         : Taha Zerrouki
 ##Web            : http://arabicstopwords.sf.net
 ##Source         : http://github.com/linuxscout/arabicstopwords
@@ -721,7 +721,7 @@ STOPWORDS={'أن': [{'word': 'أن', 'vocalized': 'أَنَّ', 'type_word': 'ح
 
  'أبدا': [{'word': 'أبدا', 'vocalized': 'أَبَدًا', 'type_word': 'اسم', 'class_word': 'ظرف زمان', 'has_conjuction': 1, 'has_definition': 0, 'has_preposition': 0, 'has_pronoun': 0, 'has_interrog': 0, 'has_conjugation': 0, 'has_qasam': 0, 'is_defined': 0, 'is_inflected': 0, 'tanwin': 0, 'action': 'عاطل', 'object_type': '', 'need': ''}],
 
- 'أثناء': [{'word': 'أثناء', 'vocalized': 'أَثْنَاءَ', 'type_word': 'اسم', 'class_word': 'ظرف زمان', 'has_conjuction': 1, 'has_definition': 0, 'has_preposition': 1, 'has_pronoun': 1, 'has_interrog': 0, 'has_conjugation': 0, 'has_qasam': 0, 'is_defined': 0, 'is_inflected': 0, 'tanwin': 0, 'action': 'جار', 'object_type': 'اسم', 'need': ''}],
+ 'أثناء': [{'word': 'أثناء', 'vocalized': 'أَثْنَاءَ', 'type_word': 'اسم', 'class_word': 'ظرف زمان', 'has_conjuction': 1, 'has_definition': 0, 'has_preposition': 0, 'has_pronoun': 1, 'has_interrog': 0, 'has_conjugation': 0, 'has_qasam': 0, 'is_defined': 0, 'is_inflected': 0, 'tanwin': 0, 'action': 'جار', 'object_type': 'اسم', 'need': ''}],
 
  'أصلا': [{'word': 'أصلا', 'vocalized': 'أَصْلًا', 'type_word': 'اسم', 'class_word': 'ظرف زمان', 'has_conjuction': 1, 'has_definition': 0, 'has_preposition': 0, 'has_pronoun': 0, 'has_interrog': 0, 'has_conjugation': 0, 'has_qasam': 0, 'is_defined': 0, 'is_inflected': 0, 'tanwin': 0, 'action': 'عاطل', 'object_type': '', 'need': ''}],
 

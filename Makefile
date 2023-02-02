@@ -54,6 +54,7 @@ pack:
 	cp -f $(DOC)/README.md $(BUILD)
 	cp -f $(DOC)/LICENSE $(BUILD)
 	cp -f $(DOC)/AUTHORS $(BUILD)
+	echo $(VERSION) >$(BUILD)/VERSION
 	#~ #classified
 	#~ mkdir -p $(BUILD)/classified
 	#~ cp -f $(OUTPUT)/stopwords.csv $(BUILD)/classified/
@@ -74,6 +75,8 @@ pack:
 	#zip
 	cd $(BUILD) && tar cfj arabicstopwords.$(VERSION).tar.bz2 * 
 	mv $(BUILD)/arabicstopwords.$(VERSION).tar.bz2 $(RELEASES)/
+	cp $(BUILD)/* -r  $(RELEASES)/latest/
+	# add files to leatest release
 
 sqlite:
 	mkdir -p $(BUILD)/sqlite
