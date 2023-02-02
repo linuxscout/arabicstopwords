@@ -73,7 +73,7 @@ This project contains two parts:
 - Python library for handling stopwords.
 
 ### Data Structure
-Two fromat of data are given:
+Two fromats of data are given:
 - classified words (lemma) with features to generate inflected froms
 - Generated forms from lemmas with adding affixes.
 
